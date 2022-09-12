@@ -5,6 +5,8 @@
     titulo="Tamanho"
     [opcoes]="['300 ml', '500 ml']"
     [escolhaAte]="1"
+    (showTamanho)="setTamanho($event)"
+
   ></app-selecao>
 
   <app-selecao
@@ -19,7 +21,13 @@
       'Castanha de caju'
     ]"
     [escolhaAte]="3"
+    (showAcrescimos)="setAcrescimo($event)"
   ></app-selecao>
 
-  <!-- <button (click)="showAcai()">Mostrar pedido</button> -->
+  <button (click)="showAcai()">Mostrar pedido</button>
+</div>
+
+<div *ngIf="showPedido">
+  <span>O pedido escolhido foi:</span> Açaí de {{_tamanho}} com 
+  <span *ngFor="let acres of _acrescimos">{{acres}} </span>
 </div>

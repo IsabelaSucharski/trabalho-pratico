@@ -1,28 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-selecao',
   templateUrl: './selecao.component.html',
   styleUrls: ['./selecao.component.css'],
 })
-export class SelecaoComponent  {
+export class SelecaoComponent {
+  @Input('titulo') titulo!: string;
+  @Input('opcoes') opcoes!: string[];
+  @Input('escolhaAte') escolhaAte!: number;
 
-  @Input('titulo') titulo!:  string;
-  @Input('opcoes') opcoes!:  string[];
-  @Input('escolhaAte') escolhaAte!:  number;
+  tamanho: string = '';
+  acrescimos: string[] = [];
+  _acrescimos: string[] = [];
 
-  selecteds: string[] = []
+  @Output() showAcrescimos = new EventEmitter();
+  @Output() showTamanho = new EventEmitter();
 
-  countSelected(value: string) {
-    this.selecteds.push(value)
-
-    console.log(this.selecteds)
+  countAcrescimos(value: string) {
+    this.acrescimos.push(value);
+    this.showAcrescimos.emit({ acrescimos: this.acrescimos });
   }
 
-  showAcai() {
-
-
+  setTamanho(value: string) {
+    this.tamanho = value;
+    this.showTamanho.emit({ tamanho: value });
   }
-  
-  
 }

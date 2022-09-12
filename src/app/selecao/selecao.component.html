@@ -1,33 +1,35 @@
 <div class="title">
-  <p>
+  <span>
     {{ titulo }}
-  </p>
-  <span *ngIf="escolhaAte === 3"
-    >Escolha até {{ escolhaAte }} ({{ selecteds }} selecionadas)</span
-  >
+  </span>
+  <div *ngIf="escolhaAte === 3">
+    <span class="sub"> Escolha até {{ escolhaAte }}</span>
+    <span class="sub" *ngIf="acrescimos.length > 0">
+      ({{ acrescimos.length }} selecionadas)</span
+    >
+  </div>
 </div>
 
 <div *ngIf="escolhaAte === 1">
-  <div *ngFor="let item of opcoes; let myIndex = index">
+  <div *ngFor="let item of opcoes; let myIndex = index" class="arrayOpcoes">
     <input
       type="radio"
-      name="{{ myIndex }}"
+      name="radio"
       id="{{ myIndex }}"
-      (click)="countSelected(item)"
-      [disabled]="selecteds.length === escolhaAte"
+      (change)="setTamanho(item)"
     />
     <label for="{{ myIndex }}">{{ item }}</label>
   </div>
 </div>
 
 <div *ngIf="escolhaAte === 3">
-  <div *ngFor="let item of opcoes; let myIndex = index">
+  <div *ngFor="let item of opcoes; let myIndex = index" class="arrayOpcoes">
     <input
       type="checkbox"
       name="{{ item }}"
       value="{{ item }}"
-      (click)="countSelected(item)"
-      [disabled]="selecteds.length === escolhaAte"
+      (change)="countAcrescimos(item)"
+      [disabled]="acrescimos.length === escolhaAte"
     />
     <label for="{{ item }}">{{ item }}</label>
   </div>
